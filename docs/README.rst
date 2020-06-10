@@ -14,8 +14,7 @@ saltplusplus-formula
    :scale: 100%
    :target: https://github.com/semantic-release/semantic-release
 
-A SaltStack formula that is empty. It has dummy content to help with a quick
-start on a new formula and it serves as a style guide.
+A SaltStack formula that performs extra configuration steps on a salt master.
 
 .. contents:: **Table of Contents**
    :depth: 1
@@ -62,73 +61,6 @@ Available states
 This installs the saltplusplus package,
 manages the saltplusplus configuration file and then
 starts the associated saltplusplus service.
-
-``saltplusplus.package``
-^^^^^^^^^^^^^^^^^^^^
-
-This state will install the saltplusplus package only.
-
-``saltplusplus.config``
-^^^^^^^^^^^^^^^^^^^
-
-This state will configure the saltplusplus service and has a dependency on ``saltplusplus.install``
-via include list.
-
-``saltplusplus.service``
-^^^^^^^^^^^^^^^^^^^^
-
-This state will start the saltplusplus service and has a dependency on ``saltplusplus.config``
-via include list.
-
-``saltplusplus.clean``
-^^^^^^^^^^^^^^^^^^
-
-*Meta-state (This is a state that includes other states)*.
-
-this state will undo everything performed in the ``saltplusplus`` meta-state in reverse order, i.e.
-stops the service,
-removes the configuration file and
-then uninstalls the package.
-
-``saltplusplus.service.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will stop the saltplusplus service and disable it at boot time.
-
-``saltplusplus.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the configuration of the saltplusplus service and has a
-dependency on ``saltplusplus.service.clean`` via include list.
-
-``saltplusplus.package.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the saltplusplus package and has a depency on
-``saltplusplus.config.clean`` via include list.
-
-``saltplusplus.subcomponent``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*Meta-state (This is a state that includes other states)*.
-
-This state installs a subcomponent configuration file before
-configuring and starting the saltplusplus service.
-
-``saltplusplus.subcomponent.config``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will configure the saltplusplus subcomponent and has a
-dependency on ``saltplusplus.config`` via include list.
-
-``saltplusplus.subcomponent.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the configuration of the saltplusplus subcomponent
-and reload the saltplusplus service by a dependency on
-``saltplusplus.service.running`` via include list and ``watch_in``
-requisite.
-
 Testing
 -------
 

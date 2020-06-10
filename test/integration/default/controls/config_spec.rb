@@ -1,36 +1,45 @@
 # frozen_string_literal: true
 
-control 'saltplusplus configuration' do
+control 'saltplusplus ssh key' do
   title 'should match desired lines'
 
-  describe file('/etc/template-formula.conf') do
+  describe file('/root/.ssh/id_rsa') do
     it { should be_file }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
-    its('mode') { should cmp '0644' }
-    its('content') do
-      should include(
-        'This is another example file from SaltStack template-formula.'
-      )
-    end
-    its('content') { should include '"added_in_pillar": "pillar_value"' }
-    its('content') { should include '"added_in_defaults": "defaults_value"' }
-    its('content') { should include '"added_in_lookup": "lookup_value"' }
-    its('content') { should include '"config": "/etc/template-formula.conf"' }
-    its('content') { should include '"lookup": {"added_in_lookup": "lookup_value",' }
-    its('content') { should include '"pkg": {"name": "' }
-    its('content') { should include '"service": {"name": "' }
-    its('content') do
-      should include(
-        '"tofs": {"files_switch": ["any/path/can/be/used/here", "id", '\
-        '"roles", "osfinger", "os", "os_family"], "source_files": '\
-        '{"saltplusplus-config-file-file-managed": ["example.tmpl.jinja"], '\
-        '"saltplusplus-subcomponent-config-file-file-managed": '\
-        '["subcomponent-example.tmpl.jinja"]}'
-      )
-    end
-    its('content') { should include '"arch": "amd64"' }
-    its('content') { should include '"winner": "pillar"}' }
-    its('content') { should include 'winner of the merge: pillar' }
+    its('mode') { should cmp '0600' }
+    its('content') { should include 'BEGIN RSA PRIVATE KEY' }
+  end
+end
+
+control 'saltplusplus ssh public key' do
+  title 'should match desired lines'
+
+  describe file('/root/.ssh/id_rsa.pub') do
+    it { should be_file }
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
+    its('mode') { should cmp '0600' }
+    its('content') { should include 'ssh-rsa abc' }
+  end
+end
+
+control 'saltplusplus ssh file root directory' do
+  title 'should exist'
+
+  describe directory('/srv/salt/ssh/files') do
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
+    its('mode') { should cmp '0700' }
+  end
+end
+
+control 'saltplusplus ssh key symlink' do
+  title 'should exist'
+
+  describe file('/srv/salt/ssh/files/deploy_key') do
+    it { should be_symlink }
+    it { should_not be_directory }
+    its('link_path') { should eq '/root/.ssh/id_rsa' }
   end
 end

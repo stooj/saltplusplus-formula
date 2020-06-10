@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-saltplusplus:
-  pkg:
-    name: saltplusplus
-  rootgroup: root
-  config: '/etc/saltplusplus'
-  service:
-    name: saltplusplus
-  subcomponent:
-    config: '/etc/saltplusplus-subcomponent-formula.conf'
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
+saltplusplus: {}
