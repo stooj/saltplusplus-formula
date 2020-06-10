@@ -12,23 +12,23 @@
 ---
 Debian:
   pkg:
-    name: TEMPLATE-debian
-  config: /etc/TEMPLATE.d/custom.conf
+    name: saltplusplus-debian
+  config: /etc/saltplusplus.d/custom.conf
 
 RedHat:
   pkg:
-    name: TEMPLATE-redhat
-  config: /etc/TEMPLATE.conf
+    name: saltplusplus-redhat
+  config: /etc/saltplusplus.conf
 
 Suse:
   pkg:
-    name: TEMPLATE-suse
+    name: saltplusplus-suse
 
 Gentoo: {}
 
 Arch:
   pkg:
-    name: TEMPLATE-arch
+    name: saltplusplus-arch
   service:
     name: service-arch
 
