@@ -43,3 +43,27 @@ control 'saltplusplus ssh key symlink' do
     its('link_path') { should eq '/root/.ssh/id_rsa' }
   end
 end
+
+control 'saltplusplus ssf file root directory' do
+  title 'should exist'
+
+  describe directory('/srv/salt/ssf/files/fishers/git') do
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
+    its('mode') { should cmp '0700' }
+  end
+end
+
+control 'saltplusplus ssf key' do
+  title 'should match desired lines'
+
+  describe file('/srv/salt/ssf/files/fishers/git/git_30_create_PR.sh') do
+    it { should be_file }
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
+    its('mode') { should cmp '0600' }
+    its('content') { should include 'Only use this for debugging!' }
+    its('content') { should include 'GH_TOKEN=ABC123' }
+  end
+end
+

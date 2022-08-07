@@ -2,6 +2,9 @@
 # vim: ft=yaml
 ---
 saltplusplus:
+  ssf:
+    api_keys:
+      github: ABC123
   ssh:
     key: |
       -----BEGIN RSA PRIVATE KEY-----
