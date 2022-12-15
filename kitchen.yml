@@ -18,17 +18,6 @@ platforms:
   - name: ubuntu-1804-master-py3
     driver:
       image: netmanagers/salt-master-py3:ubuntu-18.04
-  ## SALT `3000.3`
-  - name: ubuntu-1804-3000-3-py3
-    driver:
-      image: netmanagers/salt-3000.3-py3:ubuntu-18.04
-  - name: ubuntu-1804-3000-3-py2
-    driver:
-      image: netmanagers/salt-3000.3-py2:ubuntu-18.04
-  ## SALT `2019.2`
-  - name: ubuntu-1804-2019-2-py3
-    driver:
-      image: netmanagers/salt-2019.2-py3:ubuntu-18.04
 
 provisioner:
   name: salt_solo
