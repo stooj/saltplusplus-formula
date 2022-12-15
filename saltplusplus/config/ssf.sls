@@ -25,6 +25,6 @@ saltplusplus-config-ssf-git-script-managed:
     - group: root
     - mode: 600
     - context:
-      - gh_api_key = {{ saltplusplus.ssf.api_keys.github }}
+        - gh_api_key = {{ saltplusplus.ssf.api_keys.github }}
     - require:
       - saltplusplus-config-ssf-file-root-managed
