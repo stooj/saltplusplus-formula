@@ -24,6 +24,7 @@ saltplusplus-config-ssf-git-script-managed:
     - user: root
     - group: root
     - mode: 600
+    - template: jinja
     - context:
         gh_api_key: {{ saltplusplus.ssf.api_keys.github }}
     - require:
