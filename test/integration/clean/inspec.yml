@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-name: default
+name: clean
 title: saltplusplus formula
 maintainer: Stoo Johnston
 license: Apache-2.0
-summary: Verify that the saltplusplus formula is setup and configured correctly
+summary: Verify that the saltplusplus formula is cleaned correctly
 supports:
   - platform-name: debian
   - platform-name: ubuntu
@@ -16,3 +16,4 @@ supports:
   - platform-name: freebsd
   - platform-name: amazon
   - platform-name: arch
+
