@@ -3,24 +3,24 @@
 control 'saltplusplus ssh key' do
   title 'should match desired lines'
 
-  describe file('/root/.ssh/id_rsa') do
+  describe file('/root/.ssh/id_ed25519') do
     it { should be_file }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     its('mode') { should cmp '0600' }
-    its('content') { should include 'BEGIN RSA PRIVATE KEY' }
+    its('content') { should include 'BEGIN OPENSSH PRIVATE KEY' }
   end
 end
 
 control 'saltplusplus ssh public key' do
   title 'should match desired lines'
 
-  describe file('/root/.ssh/id_rsa.pub') do
+  describe file('/root/.ssh/id_ed25519.pub') do
     it { should be_file }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
     its('mode') { should cmp '0600' }
-    its('content') { should include 'ssh-rsa abc' }
+    its('content') { should include 'ssh-ed25519 abc' }
   end
 end
 
@@ -40,7 +40,7 @@ control 'saltplusplus ssh key symlink' do
   describe file('/srv/salt/ssh/files/deploy_key') do
     it { should be_symlink }
     it { should_not be_directory }
-    its('link_path') { should eq '/root/.ssh/id_rsa' }
+    its('link_path') { should eq '/root/.ssh/id_ed25519' }
   end
 end
 

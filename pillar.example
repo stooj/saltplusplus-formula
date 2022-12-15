@@ -6,12 +6,13 @@ saltplusplus:
     api_keys:
       github: ABC123
   ssh:
+    keytype: ed25519
     key: |
-      -----BEGIN RSA PRIVATE KEY-----
+      -----BEGIN OPENSSH PRIVATE KEY-----
       abc
-      -----END RSA PRIVATE KEY-----
+      -----END OPENSSH PRIVATE KEY-----
     pubkey: |
-      ssh-rsa abc
+      ssh-ed25519 abc
   tofs:
     # The files_switch key serves as a selector for alternative
     # directories under the formula files directory. See TOFS pattern

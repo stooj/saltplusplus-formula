@@ -6,6 +6,8 @@
 {%- set sls_service_clean = tplroot ~ '.service.clean' %}
 {%- from tplroot ~ "/map.jinja" import saltplusplus with context %}
 
+{%- set keytype = salt['pillar.get']('saltplusplus:ssh:keytype') %}
+
 saltplusplus-config-ssh-key-removed-from-fileserver:
   file.absent:
     - name: /srv/salt/ssh/files/deploy_key
@@ -16,11 +18,11 @@ saltplusplus-config-ssh-file-root-removed:
 
 saltplusplus-config-ssh-pub-key-absent:
   file.absent:
-    - name: /root/.ssh/id_rsa.pub
+    - name: /root/.ssh/id_{{ keytype }}.pub
 
 saltplusplus-config-ssh-key-absent:
   file.absent:
-    - name: /root/.ssh/id_rsa
+    - name: /root/.ssh/id_{{ keytype }}
 
 saltplusplus-config-ssf-git-script-absent:
   file.absent:

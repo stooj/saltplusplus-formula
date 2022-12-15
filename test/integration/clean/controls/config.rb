@@ -19,7 +19,7 @@ end
 control 'saltplusplus ssh key' do
   title 'should not exist'
 
-  describe file('/root/.ssh/id_rsa') do
+  describe file('/root/.ssh/id_ed25519') do
     it { should_not exist }
   end
 end
@@ -27,7 +27,7 @@ end
 control 'saltplusplus ssh public key' do
   title 'should not exist'
 
-  describe file('/root/.ssh/id_rsa.pub') do
+  describe file('/root/.ssh/id_ed25519.pub') do
     it { should_not exist }
   end
 end
