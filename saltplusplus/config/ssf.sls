@@ -29,3 +29,39 @@ saltplusplus-config-ssf-git-script-managed:
         gh_api_key: {{ saltplusplus.ssf.api_keys.github }}
     - require:
       - saltplusplus-config-ssf-file-root-managed
+
+{%- set repo_location = saltplusplus.ssf.repo_location %}
+saltplusplus-config-ssf-repos-dir-managed:
+  file.directory:
+    - name: {{ repo_location }}
+    - user: root
+    - group: root
+    - mode: 700
+    - makedirs: True
+
+{%- for name, data in saltplusplus.ssf.repos.items() %}
+{%- set origin = data['origin'] %}
+saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-cloned:
+  git.latest:
+    - name: {{ origin }}
+    - target: {{ repo_location }}/{{ name }}
+    - user: root
+    - require:
+      - saltplusplus-config-ssf-repos-dir-managed
+
+{%- for remote, url in data.items() %}
+{%- if remote == 'origin' %}
+{# Do nothing - already dealt with origin #}
+{%- else %}
+saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-repo-{{ remote }}-added:
+  cmd.run:
+    - name: git remote add {{ remote }} {{ url }}
+    - cwd: {{ repo_location }}/{{ name }}
+    - runas: root
+    - require:
+      - saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-cloned
+    - unless:
+      - grep 'remote "{{ remote }}"' {{ repo_location }}/{{ name }}/.git/config
+{%- endif %}
+{%- endfor %}
+{%- endfor %}

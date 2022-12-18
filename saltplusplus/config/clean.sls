@@ -31,3 +31,15 @@ saltplusplus-config-ssf-git-script-absent:
 saltplusplus-config-ssf-file-root-absent:
   file.absent:
     - name: /srv/salt/ssf/files/fishers/git
+
+{%- set repo_location = saltplusplus.ssf.repo_location %}
+{%- for name, data in saltplusplus.ssf.repos.items() %}
+{%- set origin = data['origin'] %}
+saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-absent:
+  file.absent:
+    - name: {{ repo_location }}/{{ name }}
+{%- endfor %}
+
+saltplusplus-config-ssf-repos-dir-absent:
+  file.absent:
+    - name: {{ repo_location }}

@@ -5,6 +5,11 @@ saltplusplus:
   ssf:
     api_keys:
       github: ABC123
+    repo_location: /srv/repos
+    repos:
+      template-formula:
+        origin: https://github.com/saltstack-formulas/template-formula.git
+        gitlab: https://gitlab.com/saltstack-formulas/template-formula.git
   ssh:
     keytype: ed25519
     key: |
