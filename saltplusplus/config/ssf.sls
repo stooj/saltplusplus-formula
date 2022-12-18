@@ -65,7 +65,7 @@ saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-repo-{{ remote }}-add
 {%- endif %}
 {%- endfor %}
 
-saltplusplus-config-ssf-repos-{{ name|replace('_', '-;) }}-repo-remotes-fetched:
+saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-repo-remotes-fetched:
   cmd.run:
     - name: git fetch --all
     - cwd: {{ repo_location }}/{{ name }}
