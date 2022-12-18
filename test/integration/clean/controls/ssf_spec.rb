@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 control 'saltplusplus ssf git script' do
   title 'should not exist'
@@ -31,4 +31,3 @@ control 'saltplusplus ssf repo directory' do
     it { should_not exist }
   end
 end
-

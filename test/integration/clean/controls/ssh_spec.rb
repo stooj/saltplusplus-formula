@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 control 'saltplusplus ssh key symlink' do
   title 'should not exist'
