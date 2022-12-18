@@ -19,8 +19,8 @@ saltplusplus-config-ssf-git-script-managed:
     - name: /srv/salt/ssf/files/fishers/git/git_30_create_PR.sh
     - source: {{ files_switch(['git_30_create_PR.sh'],
                               lookup='saltplusplus-config-ssf-git-script-managed'
-			     )
-	      }}
+          )
+        }}
     - user: root
     - group: root
     - mode: 600
@@ -64,4 +64,12 @@ saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-repo-{{ remote }}-add
       - grep 'remote "{{ remote }}"' {{ repo_location }}/{{ name }}/.git/config
 {%- endif %}
 {%- endfor %}
+
+saltplusplus-config-ssf-repos-{{ name|replace('_', '-;) }}-repo-remotes-fetched:
+  cmd.run:
+    - name: git fetch --all
+    - cwd: {{ repo_location }}/{{ name }}
+    - runas: root
+    - require:
+      - saltplusplus-config-ssf-repos-{{ name|replace('_', '-') }}-cloned
 {%- endfor %}
